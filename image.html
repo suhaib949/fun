@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Africa Slider</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<style>
+            * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Bricolage Grotesque", serif;
+        }
+
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: url(https://s3-alpha-sig.figma.com/img/63b6/fb80/01609e50fb0c415f35e8a4830777b08c?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=hHO9l1fAY3AX3wsY~42bNw2aXTz~tkHitUWBMuLd~OMM6S23VuOFZ1gbNCrrbf9J~XA3X~x6khbbSlFOGvxBHkpffYlSJyCAx3nSKL20qZ7HpIbUWf-QVPaajDvvigXmsI6oFtgz7NcZnsJ0S45jolpZH37tUuZ4p-9DvLr0o2QpEPYjraGlon8sPi0Z9hWV7QijjLjDcPnbT3nySaWoeuRu8zzL-fPivNEoG8YYcdWSvBLWM5uyS9uWpPlODzIyGSyWbUTgMvoYa8JC9t69Iuvyd5x2sDZmsot~n5wq3VpdQZpakh-XCSvXTAnJX4a8ejYM~PqRDzCoCFhqRKi~VA__) no-repeat center center / cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 130px 50px 0px;
+            transition: background-image .1s ease-in-out;
+        }
+
+        .slider-content {
+            max-width: 100%;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .slider-content h1 {
+            font-size: 55px;
+            font-weight: bold;
+        }
+
+        .slider-content p {
+            font-size: 16px;
+            margin: 20px 0;
+        }
+
+        .slider-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+        /* Flexbox layout for the image slider */
+        .slider-images {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding: 20px 0px 0px 50px;
+            z-index: 1;
+        }
+
+        /* Image styles */
+        .slider-images img {
+            width: 130px;
+            height: 270px;
+            border-radius: 6px;
+            object-fit: cover;
+            cursor: pointer;
+            flex-shrink: 0; /* Prevent shrinking */
+            transition: transform 2s ease, flex-grow 12s ease; /* Smooth transition for flex-grow */
+        }
+
+        /* Active state for image when it's selected */
+        .slider-images img.active {
+            flex-grow: 4.5; /* Increase size on active */
+            
+        }
+
+        /* Animation to grow the images automatically */
+        @keyframes autoGrow {
+            0%, 100% {
+                flex-grow: 1;
+            }
+            50% {
+        
+                flex-grow: 2.3; /* Grow the image */
+            }
+        }
+
+        /* Search bar styles */
+        .search-bar-container {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .search-wrapper {
+            position: relative;
+            flex: 1;
+        }
+
+        .search-wrapper i {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 19px;
+            color: #bdbdbd;
+            pointer-events: none;
+        }
+
+        .search-wrapper input {
+            width: 100%;
+            padding: 15px 15px 15px 40px;
+            font-size: 1rem;
+            border: none;
+            outline: none;
+            border-radius: 25px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-bar-container button {
+            padding: 15px 25px;
+            background-color: #ED5C15;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        
+        /* Tablets & Small Screens (max-width: 1024px) */
+@media (max-width: 1024px) {
+   
+
+    /* Responsive Slider */
+    .slider-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 100px 20px 0;
+        height: auto;
+    }
+
+    .slider-content {
+        max-width: 90%;
+    }
+
+    .slider-images {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 10px 0;
+    }
+
+    .slider-images img {
+        width: 100px;
+        height: 200px;
+    }
+
+    /* Search Bar */
+    .search-bar-container {
+        flex-direction: column;
+    }
+
+    .search-wrapper input {
+        width: 100%;
+        padding: 10px 100px;
+    }
+
+    .search-bar-container button {
+        width: 100%;
+        padding: 12px;
+    }
+    .header .nav-container {
+        flex-direction: row-reverse;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+}
+
+/* Mobile Devices (max-width: 600px) */
+@media (max-width: 600px) {
+    .header {
+        padding: 10px 15px;
+    }
+
+    .slider-content h1 {
+        font-size: 40px;
+    }
+
+    .slider-content p {
+        font-size: 14px;
+    }
+
+    .slider-images img {
+        width: 80px;
+        height: 160px;
+    }
+}
+
+</style>
+<body>
+
+
+    <!-- Slider -->
+    <div class="slider-container" id="slider-container">
+        <div class="slider-content">
+            <h1>Explore Africa's <br>Countries</h1>
+            <p>Lorem ipsum dolor sit amet consectetur. Quam sit facilisi nec ac. Arcu ultricies aliquet tortor pellentesque curabitur erat egestas nulla sit.</p>
+            <div class="search-bar-container">
+                <div class="search-wrapper">
+                    <i class="fas fa-filter"></i>
+                    <input type="text" placeholder="Search a destination">
+                </div>
+                <button>
+                    <span>Search</span>
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="slider-images">
+            <img src="https://s3-alpha-sig.figma.com/img/ab7c/e16a/612de41e74f9275095d06cb99a743112?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=eCXp6IkYZex6kzooB7~bDlDuYZqs-sBPgpV9PDR3b9hPCLYTpElvX50j4NvfL1SYzIKAeHlXVBGntbd-HM1jlglUwfPqXnFIFH0gbJpmtIGbXVIQfAN33M3wuAibBkVNwMdgBbEoyS7GG7leZsd~sbsrHFRzJMjmJN9AOEfnB1spqHhs9znXs3N2oKz0Y9yjAFRG8yykIe--tZWqF4o7NXVuUso-8WKJ4ltla5Ts5dORudM~dR0at~AEaN~yT3Tlph0gtn4gK9~NmTSvnfwXRHKGp-3t7JqiNsthxeV6lH1eP73DfkB2jOBlu9hukx4z-7h1PBo7BB4OXCytDgdc5A__" alt="Image 1" data-bg="https://s3-alpha-sig.figma.com/img/ab7c/e16a/612de41e74f9275095d06cb99a743112?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=eCXp6IkYZex6kzooB7~bDlDuYZqs-sBPgpV9PDR3b9hPCLYTpElvX50j4NvfL1SYzIKAeHlXVBGntbd-HM1jlglUwfPqXnFIFH0gbJpmtIGbXVIQfAN33M3wuAibBkVNwMdgBbEoyS7GG7leZsd~sbsrHFRzJMjmJN9AOEfnB1spqHhs9znXs3N2oKz0Y9yjAFRG8yykIe--tZWqF4o7NXVuUso-8WKJ4ltla5Ts5dORudM~dR0at~AEaN~yT3Tlph0gtn4gK9~NmTSvnfwXRHKGp-3t7JqiNsthxeV6lH1eP73DfkB2jOBlu9hukx4z-7h1PBo7BB4OXCytDgdc5A__">
+            <img src="https://s3-alpha-sig.figma.com/img/f832/be1f/8788498cea25f8458eb88ec150feb35b?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=TqMt5zjNjHOgJ-3D~O7ZeWAeOOc95-Wkw-hXzctCgwfvVqAAoYry~nYCq0vUheImRsDi2L7K-SezzyhV00mgR6LM4TSbzW4GGAEHVC7RnJeZt8UQHVHwa1-IhB-6fKd2XvE7XguEQcTDRi1NEacSRn14pD7U56A1gdTLpVYUg7vKs5vbBrxCrhWO-4Rymnl2v7QY9hK1py6Ew~fly9CsoSbPC8abjvYiJbgt4WFuSbkSdO~BYop4VbgUVe0AwGP6OoF~qRGmsidZCd10y3V-NAljIQ5LFzy35-LCE5qvXFBh6oLboN35kBvFih-okJ3z~GJrKXBSULXqxByzThPkDQ__" alt="Image 2" data-bg="https://s3-alpha-sig.figma.com/img/f832/be1f/8788498cea25f8458eb88ec150feb35b?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=TqMt5zjNjHOgJ-3D~O7ZeWAeOOc95-Wkw-hXzctCgwfvVqAAoYry~nYCq0vUheImRsDi2L7K-SezzyhV00mgR6LM4TSbzW4GGAEHVC7RnJeZt8UQHVHwa1-IhB-6fKd2XvE7XguEQcTDRi1NEacSRn14pD7U56A1gdTLpVYUg7vKs5vbBrxCrhWO-4Rymnl2v7QY9hK1py6Ew~fly9CsoSbPC8abjvYiJbgt4WFuSbkSdO~BYop4VbgUVe0AwGP6OoF~qRGmsidZCd10y3V-NAljIQ5LFzy35-LCE5qvXFBh6oLboN35kBvFih-okJ3z~GJrKXBSULXqxByzThPkDQ__">
+            <img src="https://s3-alpha-sig.figma.com/img/ccc4/baad/a6dff6c591130669cded113199795d37?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=XSFofMD7qYXWnjx~tptA8GjFwDlaX31Gx3~KqxFLNYbhMkf63gyFu7Zh4XnxFnCZMvYZjroxvLz8G4KpavWr45XKqbFIoAm~7JKGFd3clZs6WjEgKr3KjAFeTMn3nhefTpN4cOBIi76V-bRmMYRK48TCZQDAnMas6Mov70vgeE4iyv1LljsIy2KIWTqt6smLU5pJlU72BXNtWLL0umK8uTsSjxSY6fBeacPF6KCAO3qW4AbIuxeh~xHY36S34BdUti6g1nyuko-sg-5xtrLzOhLqNgYZEnKofU~ErNVUEymTvNYAsmRA2m~oDtv-RcdInryLupib8qhZCjMitcM~Kg__" alt="Image 3" data-bg="https://s3-alpha-sig.figma.com/img/ccc4/baad/a6dff6c591130669cded113199795d37?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=XSFofMD7qYXWnjx~tptA8GjFwDlaX31Gx3~KqxFLNYbhMkf63gyFu7Zh4XnxFnCZMvYZjroxvLz8G4KpavWr45XKqbFIoAm~7JKGFd3clZs6WjEgKr3KjAFeTMn3nhefTpN4cOBIi76V-bRmMYRK48TCZQDAnMas6Mov70vgeE4iyv1LljsIy2KIWTqt6smLU5pJlU72BXNtWLL0umK8uTsSjxSY6fBeacPF6KCAO3qW4AbIuxeh~xHY36S34BdUti6g1nyuko-sg-5xtrLzOhLqNgYZEnKofU~ErNVUEymTvNYAsmRA2m~oDtv-RcdInryLupib8qhZCjMitcM~Kg__">
+        </div>
+    </div>
+    
+     <script>
+            const sliderContainer = document.getElementById('slider-container');
+    const thumbnailImages = document.querySelectorAll('.slider-images img');
+
+    let currentIndex = 0;
+    const images = Array.from(thumbnailImages).map(img => img.getAttribute('data-bg'));
+    let slideInterval;
+
+    // Create an overlay div for sliding effect
+    const slideOverlay = document.createElement('div');
+    slideOverlay.classList.add('slide-overlay');
+    sliderContainer.appendChild(slideOverlay);
+
+    // Function to change the background with a slide effect from left
+    function changeSlide(index) {
+        if (index === currentIndex) return; // Prevent unnecessary animation
+
+        // Set overlay background
+        slideOverlay.style.backgroundImage = `url('${images[index]}')`;
+        slideOverlay.classList.add('slide-in-left');
+
+        // After animation completes, update the main background
+        setTimeout(() => {
+            sliderContainer.style.backgroundImage = `url('${images[index]}')`;
+            slideOverlay.classList.remove('slide-in-left');
+        }, 500); // Match CSS animation duration
+
+        // Remove active class from all images
+        thumbnailImages.forEach(img => img.classList.remove('active'));
+        thumbnailImages[index].classList.add('active');
+
+        currentIndex = index; // Update index
+    }
+
+    // Auto-slide functionality
+    function startAutoSlide() {
+        slideInterval = setInterval(() => {
+            let nextIndex = (currentIndex + 1) % images.length;
+            changeSlide(nextIndex);
+        }, 5000); // Change every 5 seconds
+    }
+
+    // Add click event to images to manually change the background
+    thumbnailImages.forEach((img, index) => {
+        img.addEventListener('click', () => {
+            changeSlide(index); // Change the background when an image is clicked
+            clearInterval(slideInterval); // Stop auto-slide
+            startAutoSlide(); // Restart auto-slide
+        });
+    });
+
+    // Start the auto-slide initially
+    startAutoSlide();
+
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+
+hamburger.addEventListener('click', () => {
+    console.log('Hamburger clicked'); // Debugging
+    navLinks.classList.toggle('active');
+
+    // Check if menu is open
+    if (navLinks.classList.contains('active')) {
+        navLinks.style.left = "0"; // Ensure menu is visible
+    } else {
+        navLinks.style.left = "-100%"; // Hide menu when closing
+    }
+});
+
+// Close menu when clicking a link
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        console.log('Nav link clicked'); // Debugging
+        navLinks.classList.remove('active');
+        navLinks.style.left = "-100%";
+    });
+});
+     </script>
+</body>
+</html>
